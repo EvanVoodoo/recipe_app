@@ -13,7 +13,9 @@ class CustomAppBar extends StatelessWidget {
       : super(key: key);
 
   Widget? _imageWidget(var img) {
-    if (img.runtimeType == String) {
+    if (img.runtimeType == Image) {
+      return img;
+    } else if (img.runtimeType == String) {
       return Image.asset(
         img,
         fit: BoxFit.cover,

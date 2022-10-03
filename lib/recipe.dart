@@ -7,7 +7,7 @@ import 'custom_appbar.dart';
 
 class Recipe extends StatefulWidget {
   final String name;
-  final File img;
+  final Image img;
   final String instructions = "";
 
   const Recipe({
@@ -35,7 +35,7 @@ class _RecipeState extends State<Recipe> {
           SizedBox(
             width: 100.0,
             height: 100.0,
-            child: Image.file(widget.img),
+            child: widget.img,
           ),
           Expanded(
             child: Padding(
@@ -56,7 +56,7 @@ class _RecipeState extends State<Recipe> {
 
 class RecipeDetailsScreen extends StatelessWidget {
   final String title;
-  final File img;
+  final Image img;
 
   const RecipeDetailsScreen({Key? key, required this.title, required this.img})
       : super(key: key);

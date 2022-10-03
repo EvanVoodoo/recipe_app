@@ -15,8 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String appBarImg = "lib/images/blank_img.jpg";
-
   void _addRecipe() async {
     final value = await Navigator.of(context)
         .push(createRoute(ChangeDetailsScreen(list: recipeList)));
@@ -29,9 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            CustomAppBar(
+            const CustomAppBarNoImg(
               title: "Recipes",
-              img: appBarImg,
               barFactor: 4.0,
             ),
             SliverList(

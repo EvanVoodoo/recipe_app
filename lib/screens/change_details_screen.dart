@@ -13,7 +13,7 @@ class ChangeDetailsScreen extends StatelessWidget {
   ChangeDetailsScreen({Key? key, required this.list}) : super(key: key);
 
   String? recipeName;
-  late File img;
+  Image img = Image.asset("lib/images/blank_img.jpg", fit: BoxFit.cover,);
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +62,10 @@ class ChangeDetailsScreen extends StatelessWidget {
                                     type: FileType.custom,
                                     allowedExtensions: ["jpg", "png"],
                                   );
-                                  img = result != null
-                                      ? File(
-                                          result.files.single.path.toString())
-                                      : File("lib/images/blank_img.jpg");
+                                  if (result != null) {
+                                    img = Image.file(File(
+                                        result.files.single.path.toString()));
+                                  }
                                 },
                                 child: const Text("Select Image"),
                               ),
