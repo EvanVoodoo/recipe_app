@@ -15,11 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String appBarImg =
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/homemade-bread-horizontal-1547759080.jpg?crop=0.671xw:1.00xh;0.0801xw,0&resize=640:*";
+  String appBarImg = "lib/images/blank_img.jpg";
 
   void _addRecipe() async {
-    final value = await Navigator.of(context).push(createRoute(ChangeDetailsScreen(list: recipeList)));
+    final value = await Navigator.of(context)
+        .push(createRoute(ChangeDetailsScreen(list: recipeList)));
     setState(() {});
   }
 
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           slivers: [
             CustomAppBar(
               title: "Recipes",
-              imgSrc: appBarImg,
+              img: appBarImg,
               barFactor: 4.0,
             ),
             SliverList(
@@ -47,8 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 50,
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Recipe(name: recipeList[index].name, imgSrc: recipeList[index].imgSrc)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Recipe(
+                            name: recipeList[index].name,
+                            img: recipeList[index].img),
+                      ),
                     ),
                   );
                 },

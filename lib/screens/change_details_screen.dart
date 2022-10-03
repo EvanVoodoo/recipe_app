@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:warframe_info/custom_appbar.dart';
@@ -11,7 +13,7 @@ class ChangeDetailsScreen extends StatelessWidget {
   ChangeDetailsScreen({Key? key, required this.list}) : super(key: key);
 
   String? recipeName;
-  String? recipeImg = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/homemade-bread-horizontal-1547759080.jpg?crop=0.671xw:1.00xh;0.0801xw,0&resize=640:*";
+  late File img;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ChangeDetailsScreen extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            CustomAppBar(
+            const CustomAppBarNoImg(
               title: "Add New Recipe",
               barFactor: 4.0,
             ),
@@ -55,16 +57,26 @@ class ChangeDetailsScreen extends StatelessWidget {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  // TODO: Implement adding images through FilePicker
-                                  final result = await FilePicker.platform.pickFiles();
+                                  FilePickerResult? result =
+                                      await FilePicker.platform.pickFiles(
+                                    type: FileType.custom,
+                                    allowedExtensions: ["jpg", "png"],
+                                  );
+                                  img = result != null
+                                      ? File(
+                                          result.files.single.path.toString())
+                                      : File("lib/images/blank_img.jpg");
                                 },
-                                child: const Text("Pick File"),
+                                child: const Text("Select Image"),
                               ),
                             ),
                           ],
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(bottom: 24.0),
+                          padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+                          child: Divider(
+                            thickness: 2.0,
+                          ),
                         ),
                         Row(
                           children: [
@@ -73,7 +85,8 @@ class ChangeDetailsScreen extends StatelessWidget {
                                 onPressed: () {
                                   recipeList.add(Recipe(
                                     name: recipeName!,
-                                    imgSrc: recipeImg!,
+                                    // TODO: Make file default to "lib/images/blank_img.jpg" if no image is chosen
+                                    img: img,
                                   ));
                                   Navigator.of(context).pop();
                                 },
