@@ -21,6 +21,58 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  Widget _noRecipe(int length) {
+    if (length <= 0) {
+      return SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: 1,
+          (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                height: 75,
+                alignment: Alignment.center,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    "No recipes yet. Feel free to add some!",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: recipeList.length,
+          (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                height: 75,
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Recipe(
+                      name: recipeList[index].name, img: recipeList[index].img),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,29 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "Recipes",
               barFactor: 4.0,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: recipeList.length,
-                (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 12.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: index.isOdd ? Colors.white10 : Colors.white,
-                      ),
-                      height: 50,
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Recipe(
-                            name: recipeList[index].name,
-                            img: recipeList[index].img),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            _noRecipe(recipeList.length),
           ],
         ),
         floatingActionButton: Align(
