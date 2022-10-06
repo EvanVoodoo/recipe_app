@@ -37,10 +37,17 @@ class CustomAppBar extends StatelessWidget {
       elevation: 2.0,
       expandedHeight: MediaQuery.of(context).size.height / barFactor,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(left: 55.0, bottom: 16.0),
+        centerTitle: true,
+        titlePadding: const EdgeInsets.only(bottom: 12.0),
         title: Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.left,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          softWrap: true,
         ),
         background: Opacity(
           opacity: 1.0,
@@ -70,11 +77,13 @@ class CustomAppBarNoImg extends StatelessWidget {
       elevation: 2.0,
       expandedHeight: MediaQuery.of(context).size.height / barFactor,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(left: 30.0, bottom: 12.0),
+        titlePadding: const EdgeInsets.only(bottom: 12.0),
         title: Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontWeight: FontWeight.bold,),
         ),
+        centerTitle: true,
       ),
     );
   }

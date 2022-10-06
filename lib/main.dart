@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warframe_info/custom_palette.dart';
 import 'package:warframe_info/screens/home_screen.dart';
 
 void main() {
@@ -15,6 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Web App',
       theme: ThemeData(
         primarySwatch: Colors.amber,
+        splashColor: ColorPalette().red,
+        highlightColor: Colors.transparent,
       ),
       home: const InfoHomePage(),
     );

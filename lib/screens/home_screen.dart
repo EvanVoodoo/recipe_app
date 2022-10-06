@@ -63,7 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Recipe(
-                      name: recipeList[index].name, img: recipeList[index].img),
+                    name: recipeList[index].name,
+                    img: recipeList[index].img,
+                    instructions: recipeList[index].instructions,
+                  ),
                 ),
               ),
             );

@@ -2,43 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'custom_animations.dart';
 import 'custom_appbar.dart';
-
-class Ingredient {
-  final String name;
-  final String amount;
-
-  Ingredient({
-    required this.name,
-    required this.amount,
-  });
-
-  @override
-  String toString() {
-    return "$amount of $name";
-  }
-}
+import 'instructions.dart';
 
 class Recipe extends StatefulWidget {
   final String name;
   final Image img;
-  final String instructions =
-      "1. Get materials\n2. Get ingredients\n3. ???\n4. Profit\n5. Profit\n6. Profit\n7. Profit\n8. Profit\n9. Profit\n10. Profit\n11. Profit\n12. Profit\n13. Profit\n14. Profit\n15. Profit\n16. Profit\n17. Profit\n8. Profit\n9. Profit\n10. Profit\n11. Profit\n12. Profit\n13. Profit\n14. Profit\n15. Profit\n16. Profit\n17. Profit\n8. Profit\n9. Profit\n10. Profit\n11. Profit\n12. Profit\n13. Profit\n14. Profit\n15. Profit\n16. Profit\n17. Profit";
-  final List<Ingredient> ingredients = [
-    Ingredient(name: "Tomatoes", amount: "12"),
-    Ingredient(name: "Cheese", amount: "4"),
-    Ingredient(name: "Bread", amount: "1"),
-  ];
-  final List<String> materials = [
-    "Twelve pots",
-    "11 pans",
-    "1 spork",
-  ];
+  final Instructions instructions;
+  final List<Ingredient> ingredients;
+  final List<String> materials;
 
   Recipe({
     super.key,
     required this.name,
     required this.img,
-  });
+    required this.instructions,
+  })  : ingredients = instructions.ingredients,
+        materials = instructions.materials;
 
   @override
   State<Recipe> createState() => _RecipeState();
@@ -186,7 +165,7 @@ class RecipeDetailsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "How to Cook:",
+                                      "Instructions",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16.0,
@@ -195,7 +174,7 @@ class RecipeDetailsScreen extends StatelessWidget {
                                     const Padding(
                                       padding: EdgeInsets.only(bottom: 4.0),
                                     ),
-                                    Text(recipe.instructions),
+                                    Text(recipe.instructions.toString()),
                                   ],
                                 ),
                               ),
